@@ -13,13 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\day1">
+    <Filter Include="Source Files\dayOne">
       <UniqueIdentifier>{0de586ec-993c-4ac1-a5b4-587561b5f90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dayOne">
+      <UniqueIdentifier>{89d04c44-cc92-4160-a718-d2b58a233253}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="day1.cpp">
-      <Filter>Source Files\day1</Filter>
+      <Filter>Source Files\dayOne</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="day1test.txt">
+      <Filter>Source Files\dayOne</Filter>
+    </Text>
+    <Text Include="day1full.txt">
+      <Filter>Source Files\dayOne</Filter>
+    </Text>
   </ItemGroup>
 </Project>
