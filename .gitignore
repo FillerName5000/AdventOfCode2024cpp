@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /day1full.txt
 /day1test.txt
+/dayTwoTest.txt
+/dayTwoFull.txt

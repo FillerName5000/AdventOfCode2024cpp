@@ -1,5 +1,5 @@
 #pragma once
 
-namespace dayOne {
+namespace DayOne {
     void dayOne();
 }
