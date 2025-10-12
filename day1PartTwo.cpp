@@ -1,19 +1,17 @@
-// Locations listed by location ID
-// Mismatched lists
-// Smallest-smallest;second-second;...
-// intrapair distance
-// optimal sorting algo
-#include "day1.h"
+#include "day1PartTwo.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 
-namespace DayOne
+namespace DayOnePartTwo
 {
 	namespace {
+		using cmap_return_val_t = std::unordered_map<int, int>::iterator;
+
 		std::vector<int> firstElements;
 		std::vector<int> secondElements;
 
@@ -35,13 +33,13 @@ namespace DayOne
 			secondElements.push_back(std::stoi(line));
 		}
 	}
-	void dayOne() {
-		std::cout << "Running program dayOne" << '\n';
+	void dayOnePartTwo() {
+		std::cout << "Running program dayOne Part Two" << '\n';
 
 		std::string line;
 		std::ifstream inputFile("day1full.txt");
 
-		if (inputFile.is_open()) 
+		if (inputFile.is_open())
 		{
 			while (getline(inputFile, line)) {
 				handleLine(line);
@@ -49,14 +47,22 @@ namespace DayOne
 
 			std::sort(firstElements.begin(), firstElements.end()); // faster than any handwritten algorithm.
 
-			std::sort(secondElements.begin(), secondElements.end()); 
+			std::unordered_map<int, int> countMap;
+			for (const int& num : secondElements) {
+				++countMap[num];
+			}
 
 			int diffTotal = 0;
 			size_t lineCount = firstElements.size();
+			int idToCheck = 0;
 
 			for (int i = 0; i < lineCount; i++)
 			{
-				diffTotal += abs(firstElements[i] - secondElements[i]);
+				idToCheck = firstElements[i];
+				cmap_return_val_t foundPair = countMap.find(idToCheck); // _map[key] inserts values
+				if (foundPair != countMap.end()) { // end value = not found
+					diffTotal += idToCheck * (*foundPair).second;
+				}
 			}
 			std::cout << diffTotal;
 		}
