@@ -49,6 +49,7 @@ namespace DayFourPartTwo
 			coordToCheck.first += 1;
 			coordToCheck.second -= 1;
 			if (!isValidCoord(coordToCheck, kArraySize)) return false;
+			return true; 
 		}
 
 		bool isValidOppositeDiagonalChar(char sourceChar, char oppositeToCheck)
