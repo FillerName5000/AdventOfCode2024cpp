@@ -376,3 +376,6 @@ FodyWeavers.xsd
 /daySevenFull.txt
 /daySevenTest.txt
 /BigInt.hpp
+/dayEightTest.txt
+/dayEightFull.txt
+/template.cpp
