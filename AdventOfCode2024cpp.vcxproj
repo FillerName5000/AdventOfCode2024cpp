@@ -130,6 +130,7 @@
     <ClCompile Include="dayFour.cpp" />
     <ClCompile Include="dayFourPartTwo.cpp" />
     <ClCompile Include="daySeven.cpp" />
+    <ClCompile Include="daySevenPartTwo.cpp" />
     <ClCompile Include="daySix.cpp" />
     <ClCompile Include="daySixPartTwo.cpp" />
     <ClCompile Include="dayThree.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="day6.h" />
     <ClInclude Include="day6PartTwo.h" />
     <ClInclude Include="day7.h" />
+    <ClInclude Include="day7PartTwo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

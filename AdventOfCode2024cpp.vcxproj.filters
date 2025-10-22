@@ -102,6 +102,9 @@
     <ClCompile Include="daySeven.cpp">
       <Filter>Source Files\daySeven</Filter>
     </ClCompile>
+    <ClCompile Include="daySevenPartTwo.cpp">
+      <Filter>Source Files\daySeven</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="day1test.txt">
@@ -189,6 +192,9 @@
     </ClInclude>
     <ClInclude Include="BigInt.hpp">
       <Filter>Header Files\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="day7PartTwo.h">
+      <Filter>Header Files\daySeven</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
