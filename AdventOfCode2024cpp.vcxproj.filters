@@ -49,6 +49,15 @@
     <Filter Include="Source Files\daySix">
       <UniqueIdentifier>{ba69ed98-2650-47c0-94df-e98c06315cbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\daySeven">
+      <UniqueIdentifier>{423eda76-0dda-4e73-bcee-6b07b3f564a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\daySeven">
+      <UniqueIdentifier>{5a5f9cb7-448a-487f-8fc1-07593dd449e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libs">
+      <UniqueIdentifier>{83b195c4-288f-4428-933c-5b19e7e643c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="day1.cpp">
@@ -90,6 +99,9 @@
     <ClCompile Include="daySixPartTwo.cpp">
       <Filter>Source Files\daySix</Filter>
     </ClCompile>
+    <ClCompile Include="daySeven.cpp">
+      <Filter>Source Files\daySeven</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="day1test.txt">
@@ -128,6 +140,12 @@
     <Text Include="daySixFull.txt">
       <Filter>Source Files\daySix</Filter>
     </Text>
+    <Text Include="daySevenTest.txt">
+      <Filter>Source Files\daySeven</Filter>
+    </Text>
+    <Text Include="daySevenFull.txt">
+      <Filter>Source Files\daySeven</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="day1PartTwo.h">
@@ -165,6 +183,12 @@
     </ClInclude>
     <ClInclude Include="day6PartTwo.h">
       <Filter>Header Files\daySix</Filter>
+    </ClInclude>
+    <ClInclude Include="day7.h">
+      <Filter>Header Files\daySeven</Filter>
+    </ClInclude>
+    <ClInclude Include="BigInt.hpp">
+      <Filter>Header Files\libs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
