@@ -70,6 +70,12 @@
     <Filter Include="Source Files\dayNine">
       <UniqueIdentifier>{80e8213a-4680-4d1c-a78c-bfb80c17490d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\dayTen">
+      <UniqueIdentifier>{a904b583-4e31-4a36-ad4b-f9caf8258dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dayTen">
+      <UniqueIdentifier>{6d4f4887-d937-457e-bf8d-0a511158dd61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="day1.cpp">
@@ -132,6 +138,9 @@
     <ClCompile Include="dayNinePartTwo.cpp">
       <Filter>Source Files\dayNine</Filter>
     </ClCompile>
+    <ClCompile Include="dayTen.cpp">
+      <Filter>Source Files\dayTen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="day1test.txt">
@@ -187,6 +196,12 @@
     </Text>
     <Text Include="dayNineFull.txt">
       <Filter>Source Files\dayNine</Filter>
+    </Text>
+    <Text Include="dayTenFull.txt">
+      <Filter>Source Files\dayTen</Filter>
+    </Text>
+    <Text Include="dayTenTest.txt">
+      <Filter>Source Files\dayTen</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -247,5 +262,10 @@
     <ClInclude Include="dayNinePartTwo.h">
       <Filter>Header Files\dayNine</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dayTen.h">
+      <Filter>Header Files\dayTen</Filter>
+    </None>
   </ItemGroup>
 </Project>
