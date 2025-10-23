@@ -16,14 +16,8 @@
     <Filter Include="Source Files\dayOne">
       <UniqueIdentifier>{0de586ec-993c-4ac1-a5b4-587561b5f90c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\dayOne">
-      <UniqueIdentifier>{89d04c44-cc92-4160-a718-d2b58a233253}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\dayTwo">
       <UniqueIdentifier>{a72be0d0-cbd2-459b-b532-370cf46adc18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayTwo">
-      <UniqueIdentifier>{ea8b3e13-3951-4413-8420-5f5bec4916bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\dayThree">
       <UniqueIdentifier>{96314044-6952-4762-a973-613919b8076c}</UniqueIdentifier>
@@ -36,9 +30,6 @@
     </Filter>
     <Filter Include="Source Files\dayFour">
       <UniqueIdentifier>{b1cfcb35-f610-4da7-9b6a-a2c8b5369aaf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayFive">
-      <UniqueIdentifier>{91aa223f-e5f8-4a38-9c75-d4db424a5876}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\dayFive">
       <UniqueIdentifier>{de793415-a53d-4ce7-9a70-c7cbc264de24}</UniqueIdentifier>
@@ -63,6 +54,21 @@
     </Filter>
     <Filter Include="Header Files\dayEight">
       <UniqueIdentifier>{0fb6b867-7d71-4537-b833-f4741c657325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dayTwo">
+      <UniqueIdentifier>{ea8b3e13-3951-4413-8420-5f5bec4916bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dayFive">
+      <UniqueIdentifier>{91aa223f-e5f8-4a38-9c75-d4db424a5876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dayNine">
+      <UniqueIdentifier>{5b231fc4-9ab9-4330-b71d-c3fe5904618a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dayOne">
+      <UniqueIdentifier>{89d04c44-cc92-4160-a718-d2b58a233253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dayNine">
+      <UniqueIdentifier>{80e8213a-4680-4d1c-a78c-bfb80c17490d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +126,9 @@
     <ClCompile Include="dayEightPartTwo.cpp">
       <Filter>Source Files\dayEight</Filter>
     </ClCompile>
+    <ClCompile Include="dayNine.cpp">
+      <Filter>Source Files\dayNine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="day1test.txt">
@@ -169,6 +178,12 @@
     </Text>
     <Text Include="dayEightFull.txt">
       <Filter>Source Files\dayEight</Filter>
+    </Text>
+    <Text Include="dayNineTest.txt">
+      <Filter>Source Files\dayNine</Filter>
+    </Text>
+    <Text Include="dayNineFull.txt">
+      <Filter>Source Files\dayNine</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +237,9 @@
     </ClInclude>
     <ClInclude Include="day8PartTwo.h">
       <Filter>Header Files\dayEight</Filter>
+    </ClInclude>
+    <ClInclude Include="dayNine.h">
+      <Filter>Header Files\dayNine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
