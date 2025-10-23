@@ -1,3 +1,10 @@
+// COMMENTED OUT CODE DISCLAIMER
+// To ensure compilation for the other files with the BigInt.hpp or any other external header files, this entire file is commented out. 
+// In the current structure that only uses one file at a time, header files are not perfectly organised.
+// Having many files in a project you have no intention of using is not a normal use case, therefore organising this perfectly is not a priority.
+// To test this file, get the BigInt hpp file from github and add it to the Header Files, in my case in a "libs" filter. 
+// Comment out any other cpp files using it. Only the .cpp files should need to be edited.
+// /COMMENTED OUT CODE DISCLAIMER
 //#include <cstdlib>
 //#include <iostream>
 //#include <fstream>
