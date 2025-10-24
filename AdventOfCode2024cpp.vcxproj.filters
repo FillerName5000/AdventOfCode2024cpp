@@ -13,68 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\dayOne">
-      <UniqueIdentifier>{0de586ec-993c-4ac1-a5b4-587561b5f90c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayTwo">
-      <UniqueIdentifier>{a72be0d0-cbd2-459b-b532-370cf46adc18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayThree">
-      <UniqueIdentifier>{96314044-6952-4762-a973-613919b8076c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayThree">
-      <UniqueIdentifier>{ec530e9f-b844-4c1a-8c0b-60a6781a5b83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayFour">
-      <UniqueIdentifier>{0d4b09e0-8e35-4207-becc-f9dd7059cbc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayFour">
-      <UniqueIdentifier>{b1cfcb35-f610-4da7-9b6a-a2c8b5369aaf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayFive">
-      <UniqueIdentifier>{de793415-a53d-4ce7-9a70-c7cbc264de24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\daySix">
-      <UniqueIdentifier>{69a2603b-41ad-4705-87d0-be53155965fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\daySix">
-      <UniqueIdentifier>{ba69ed98-2650-47c0-94df-e98c06315cbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\daySeven">
-      <UniqueIdentifier>{423eda76-0dda-4e73-bcee-6b07b3f564a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\daySeven">
-      <UniqueIdentifier>{5a5f9cb7-448a-487f-8fc1-07593dd449e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\libs">
       <UniqueIdentifier>{83b195c4-288f-4428-933c-5b19e7e643c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayEight">
-      <UniqueIdentifier>{39102eac-dbef-43d0-9ed5-82e5f5abfc38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayEight">
-      <UniqueIdentifier>{0fb6b867-7d71-4537-b833-f4741c657325}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayTwo">
-      <UniqueIdentifier>{ea8b3e13-3951-4413-8420-5f5bec4916bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayFive">
-      <UniqueIdentifier>{91aa223f-e5f8-4a38-9c75-d4db424a5876}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayNine">
-      <UniqueIdentifier>{5b231fc4-9ab9-4330-b71d-c3fe5904618a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayOne">
-      <UniqueIdentifier>{89d04c44-cc92-4160-a718-d2b58a233253}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayNine">
-      <UniqueIdentifier>{80e8213a-4680-4d1c-a78c-bfb80c17490d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\dayTen">
-      <UniqueIdentifier>{a904b583-4e31-4a36-ad4b-f9caf8258dde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dayTen">
-      <UniqueIdentifier>{6d4f4887-d937-457e-bf8d-0a511158dd61}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\dayEleven">
       <UniqueIdentifier>{08f8893d-1290-4108-8251-3666abc97f36}</UniqueIdentifier>
@@ -82,73 +22,145 @@
     <Filter Include="Source Files\dayEleven">
       <UniqueIdentifier>{3ec2ffbd-8ef5-4696-a45c-eadc64a742b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\dayTwelve">
+      <UniqueIdentifier>{0ef703b5-899d-4f7f-9541-4cac4cf75567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dayTwelve">
+      <UniqueIdentifier>{1771d448-5159-4cad-859d-07f14076f26b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays">
+      <UniqueIdentifier>{85c6e4e2-dafb-46d1-ab8e-8ad5d21cf1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayEight">
+      <UniqueIdentifier>{0fb6b867-7d71-4537-b833-f4741c657325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayFive">
+      <UniqueIdentifier>{91aa223f-e5f8-4a38-9c75-d4db424a5876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayFour">
+      <UniqueIdentifier>{0d4b09e0-8e35-4207-becc-f9dd7059cbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayNine">
+      <UniqueIdentifier>{5b231fc4-9ab9-4330-b71d-c3fe5904618a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayOne">
+      <UniqueIdentifier>{89d04c44-cc92-4160-a718-d2b58a233253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\daySeven">
+      <UniqueIdentifier>{423eda76-0dda-4e73-bcee-6b07b3f564a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\daySix">
+      <UniqueIdentifier>{69a2603b-41ad-4705-87d0-be53155965fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayThree">
+      <UniqueIdentifier>{ec530e9f-b844-4c1a-8c0b-60a6781a5b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayTwo">
+      <UniqueIdentifier>{ea8b3e13-3951-4413-8420-5f5bec4916bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays">
+      <UniqueIdentifier>{14d17819-01e7-48f0-a2cb-01ffb0b1cf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayEight">
+      <UniqueIdentifier>{39102eac-dbef-43d0-9ed5-82e5f5abfc38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayFive">
+      <UniqueIdentifier>{de793415-a53d-4ce7-9a70-c7cbc264de24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayFour">
+      <UniqueIdentifier>{b1cfcb35-f610-4da7-9b6a-a2c8b5369aaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayNine">
+      <UniqueIdentifier>{80e8213a-4680-4d1c-a78c-bfb80c17490d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayOne">
+      <UniqueIdentifier>{0de586ec-993c-4ac1-a5b4-587561b5f90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\daySeven">
+      <UniqueIdentifier>{5a5f9cb7-448a-487f-8fc1-07593dd449e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\daySix">
+      <UniqueIdentifier>{ba69ed98-2650-47c0-94df-e98c06315cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayThree">
+      <UniqueIdentifier>{96314044-6952-4762-a973-613919b8076c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayTwo">
+      <UniqueIdentifier>{a72be0d0-cbd2-459b-b532-370cf46adc18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\firstTenDays\dayTen">
+      <UniqueIdentifier>{a904b583-4e31-4a36-ad4b-f9caf8258dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\firstTenDays\dayTen">
+      <UniqueIdentifier>{6d4f4887-d937-457e-bf8d-0a511158dd61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="day1.cpp">
-      <Filter>Source Files\dayOne</Filter>
+      <Filter>Source Files\firstTenDays\dayOne</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="day1PartTwo.cpp">
-      <Filter>Source Files\dayOne</Filter>
+      <Filter>Source Files\firstTenDays\dayOne</Filter>
     </ClCompile>
     <ClCompile Include="dayTwo.cpp">
-      <Filter>Source Files\dayTwo</Filter>
+      <Filter>Source Files\firstTenDays\dayTwo</Filter>
     </ClCompile>
     <ClCompile Include="dayTwoPartTwo.cpp">
-      <Filter>Source Files\dayTwo</Filter>
+      <Filter>Source Files\firstTenDays\dayTwo</Filter>
     </ClCompile>
     <ClCompile Include="dayThree.cpp">
-      <Filter>Source Files\dayThree</Filter>
+      <Filter>Source Files\firstTenDays\dayThree</Filter>
     </ClCompile>
     <ClCompile Include="dayThreePartTwo.cpp">
-      <Filter>Source Files\dayThree</Filter>
+      <Filter>Source Files\firstTenDays\dayThree</Filter>
     </ClCompile>
     <ClCompile Include="dayFour.cpp">
-      <Filter>Source Files\dayFour</Filter>
+      <Filter>Source Files\firstTenDays\dayFour</Filter>
     </ClCompile>
     <ClCompile Include="dayFourPartTwo.cpp">
-      <Filter>Source Files\dayFour</Filter>
+      <Filter>Source Files\firstTenDays\dayFour</Filter>
     </ClCompile>
     <ClCompile Include="dayFive.cpp">
-      <Filter>Source Files\dayFive</Filter>
+      <Filter>Source Files\firstTenDays\dayFive</Filter>
     </ClCompile>
     <ClCompile Include="dayFivePartTwo.cpp">
-      <Filter>Source Files\dayFive</Filter>
+      <Filter>Source Files\firstTenDays\dayFive</Filter>
     </ClCompile>
     <ClCompile Include="daySix.cpp">
-      <Filter>Source Files\daySix</Filter>
+      <Filter>Source Files\firstTenDays\daySix</Filter>
     </ClCompile>
     <ClCompile Include="daySixPartTwo.cpp">
-      <Filter>Source Files\daySix</Filter>
+      <Filter>Source Files\firstTenDays\daySix</Filter>
     </ClCompile>
     <ClCompile Include="daySeven.cpp">
-      <Filter>Source Files\daySeven</Filter>
+      <Filter>Source Files\firstTenDays\daySeven</Filter>
     </ClCompile>
     <ClCompile Include="daySevenPartTwo.cpp">
-      <Filter>Source Files\daySeven</Filter>
+      <Filter>Source Files\firstTenDays\daySeven</Filter>
     </ClCompile>
     <ClCompile Include="dayEight.cpp">
-      <Filter>Source Files\dayEight</Filter>
+      <Filter>Source Files\firstTenDays\dayEight</Filter>
     </ClCompile>
     <ClCompile Include="template.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dayEightPartTwo.cpp">
-      <Filter>Source Files\dayEight</Filter>
+      <Filter>Source Files\firstTenDays\dayEight</Filter>
     </ClCompile>
     <ClCompile Include="dayNine.cpp">
-      <Filter>Source Files\dayNine</Filter>
+      <Filter>Source Files\firstTenDays\dayNine</Filter>
     </ClCompile>
     <ClCompile Include="dayNinePartTwo.cpp">
-      <Filter>Source Files\dayNine</Filter>
+      <Filter>Source Files\firstTenDays\dayNine</Filter>
     </ClCompile>
     <ClCompile Include="dayTen.cpp">
-      <Filter>Source Files\dayTen</Filter>
+      <Filter>Source Files\firstTenDays\dayTen</Filter>
     </ClCompile>
     <ClCompile Include="dayTenPartTwo.cpp">
-      <Filter>Source Files\dayTen</Filter>
+      <Filter>Source Files\firstTenDays\dayTen</Filter>
     </ClCompile>
     <ClCompile Include="dayEleven.cpp">
       <Filter>Source Files\dayEleven</Filter>
@@ -156,67 +168,70 @@
     <ClCompile Include="dayElevenPartTwo.cpp">
       <Filter>Source Files\dayEleven</Filter>
     </ClCompile>
+    <ClCompile Include="dayTwelve.cpp">
+      <Filter>Source Files\dayTwelve</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="day1test.txt">
-      <Filter>Source Files\dayOne</Filter>
+      <Filter>Source Files\firstTenDays\dayOne</Filter>
     </Text>
     <Text Include="day1full.txt">
-      <Filter>Source Files\dayOne</Filter>
+      <Filter>Source Files\firstTenDays\dayOne</Filter>
     </Text>
     <Text Include="dayTwoTest.txt">
-      <Filter>Source Files\dayTwo</Filter>
+      <Filter>Source Files\firstTenDays\dayTwo</Filter>
     </Text>
     <Text Include="dayTwoFull.txt">
-      <Filter>Source Files\dayTwo</Filter>
+      <Filter>Source Files\firstTenDays\dayTwo</Filter>
     </Text>
     <Text Include="dayThreeFull.txt">
-      <Filter>Source Files\dayThree</Filter>
+      <Filter>Source Files\firstTenDays\dayThree</Filter>
     </Text>
     <Text Include="dayThreeTest.txt">
-      <Filter>Source Files\dayThree</Filter>
+      <Filter>Source Files\firstTenDays\dayThree</Filter>
     </Text>
     <Text Include="dayFourTest.txt">
-      <Filter>Source Files\dayFour</Filter>
+      <Filter>Source Files\firstTenDays\dayFour</Filter>
     </Text>
     <Text Include="dayFiveTest.txt">
-      <Filter>Source Files\dayFive</Filter>
+      <Filter>Source Files\firstTenDays\dayFive</Filter>
     </Text>
     <Text Include="dayFiveFull.txt">
-      <Filter>Source Files\dayFive</Filter>
+      <Filter>Source Files\firstTenDays\dayFive</Filter>
     </Text>
     <Text Include="dayFourFull.txt">
-      <Filter>Source Files\dayFour</Filter>
+      <Filter>Source Files\firstTenDays\dayFour</Filter>
     </Text>
     <Text Include="daySixTest.txt">
-      <Filter>Source Files\daySix</Filter>
+      <Filter>Source Files\firstTenDays\daySix</Filter>
     </Text>
     <Text Include="daySixFull.txt">
-      <Filter>Source Files\daySix</Filter>
+      <Filter>Source Files\firstTenDays\daySix</Filter>
     </Text>
     <Text Include="daySevenTest.txt">
-      <Filter>Source Files\daySeven</Filter>
+      <Filter>Source Files\firstTenDays\daySeven</Filter>
     </Text>
     <Text Include="daySevenFull.txt">
-      <Filter>Source Files\daySeven</Filter>
+      <Filter>Source Files\firstTenDays\daySeven</Filter>
     </Text>
     <Text Include="dayEightTest.txt">
-      <Filter>Source Files\dayEight</Filter>
+      <Filter>Source Files\firstTenDays\dayEight</Filter>
     </Text>
     <Text Include="dayEightFull.txt">
-      <Filter>Source Files\dayEight</Filter>
+      <Filter>Source Files\firstTenDays\dayEight</Filter>
     </Text>
     <Text Include="dayNineTest.txt">
-      <Filter>Source Files\dayNine</Filter>
+      <Filter>Source Files\firstTenDays\dayNine</Filter>
     </Text>
     <Text Include="dayNineFull.txt">
-      <Filter>Source Files\dayNine</Filter>
+      <Filter>Source Files\firstTenDays\dayNine</Filter>
     </Text>
     <Text Include="dayTenFull.txt">
-      <Filter>Source Files\dayTen</Filter>
+      <Filter>Source Files\firstTenDays\dayTen</Filter>
     </Text>
     <Text Include="dayTenTest.txt">
-      <Filter>Source Files\dayTen</Filter>
+      <Filter>Source Files\firstTenDays\dayTen</Filter>
     </Text>
     <Text Include="dayElevenFull.txt">
       <Filter>Source Files\dayEleven</Filter>
@@ -224,67 +239,73 @@
     <Text Include="dayElevenTest.txt">
       <Filter>Source Files\dayEleven</Filter>
     </Text>
+    <Text Include="dayTwelveFull.txt">
+      <Filter>Source Files\dayTwelve</Filter>
+    </Text>
+    <Text Include="dayTwelveTest.txt">
+      <Filter>Source Files\dayTwelve</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="day1PartTwo.h">
-      <Filter>Header Files\dayOne</Filter>
+      <Filter>Header Files\firstTenDays\dayOne</Filter>
     </ClInclude>
     <ClInclude Include="day2.h">
-      <Filter>Header Files\dayTwo</Filter>
+      <Filter>Header Files\firstTenDays\dayTwo</Filter>
     </ClInclude>
     <ClInclude Include="day1.h">
-      <Filter>Header Files\dayOne</Filter>
+      <Filter>Header Files\firstTenDays\dayOne</Filter>
     </ClInclude>
     <ClInclude Include="day2PartTwo.h">
-      <Filter>Header Files\dayTwo</Filter>
+      <Filter>Header Files\firstTenDays\dayTwo</Filter>
     </ClInclude>
     <ClInclude Include="day3.h">
-      <Filter>Header Files\dayThree</Filter>
+      <Filter>Header Files\firstTenDays\dayThree</Filter>
     </ClInclude>
     <ClInclude Include="day3PartTwo.h">
-      <Filter>Header Files\dayThree</Filter>
+      <Filter>Header Files\firstTenDays\dayThree</Filter>
     </ClInclude>
     <ClInclude Include="day4.h">
-      <Filter>Header Files\dayFour</Filter>
+      <Filter>Header Files\firstTenDays\dayFour</Filter>
     </ClInclude>
     <ClInclude Include="day4PartTwo.h">
-      <Filter>Header Files\dayFour</Filter>
+      <Filter>Header Files\firstTenDays\dayFour</Filter>
     </ClInclude>
     <ClInclude Include="day5.h">
-      <Filter>Header Files\dayFive</Filter>
+      <Filter>Header Files\firstTenDays\dayFive</Filter>
     </ClInclude>
     <ClInclude Include="day5PartTwo.h">
-      <Filter>Header Files\dayFive</Filter>
+      <Filter>Header Files\firstTenDays\dayFive</Filter>
     </ClInclude>
     <ClInclude Include="day6.h">
-      <Filter>Header Files\daySix</Filter>
+      <Filter>Header Files\firstTenDays\daySix</Filter>
     </ClInclude>
     <ClInclude Include="day6PartTwo.h">
-      <Filter>Header Files\daySix</Filter>
+      <Filter>Header Files\firstTenDays\daySix</Filter>
     </ClInclude>
     <ClInclude Include="day7.h">
-      <Filter>Header Files\daySeven</Filter>
+      <Filter>Header Files\firstTenDays\daySeven</Filter>
     </ClInclude>
     <ClInclude Include="BigInt.hpp">
       <Filter>Header Files\libs</Filter>
     </ClInclude>
     <ClInclude Include="day7PartTwo.h">
-      <Filter>Header Files\daySeven</Filter>
+      <Filter>Header Files\firstTenDays\daySeven</Filter>
     </ClInclude>
     <ClInclude Include="day8.h">
-      <Filter>Header Files\dayEight</Filter>
+      <Filter>Header Files\firstTenDays\dayEight</Filter>
     </ClInclude>
     <ClInclude Include="day8PartTwo.h">
-      <Filter>Header Files\dayEight</Filter>
+      <Filter>Header Files\firstTenDays\dayEight</Filter>
     </ClInclude>
     <ClInclude Include="dayNine.h">
-      <Filter>Header Files\dayNine</Filter>
+      <Filter>Header Files\firstTenDays\dayNine</Filter>
     </ClInclude>
     <ClInclude Include="dayNinePartTwo.h">
-      <Filter>Header Files\dayNine</Filter>
+      <Filter>Header Files\firstTenDays\dayNine</Filter>
     </ClInclude>
     <ClInclude Include="dayTenPartTwo.h">
-      <Filter>Header Files\dayTen</Filter>
+      <Filter>Header Files\firstTenDays\dayTen</Filter>
     </ClInclude>
     <ClInclude Include="dayEleven.h">
       <Filter>Header Files\dayEleven</Filter>
@@ -292,10 +313,13 @@
     <ClInclude Include="dayElevenPartTwo.h">
       <Filter>Header Files\dayEleven</Filter>
     </ClInclude>
+    <ClInclude Include="dayTwelve.h">
+      <Filter>Header Files\dayTwelve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="dayTen.h">
-      <Filter>Header Files\dayTen</Filter>
+      <Filter>Header Files\firstTenDays\dayTen</Filter>
     </None>
   </ItemGroup>
 </Project>
