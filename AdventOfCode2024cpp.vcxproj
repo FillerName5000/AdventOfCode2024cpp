@@ -144,6 +144,7 @@
     <ClCompile Include="dayThree.cpp" />
     <ClCompile Include="dayThreePartTwo.cpp" />
     <ClCompile Include="dayTwelve.cpp" />
+    <ClCompile Include="dayTwelvePartTwo.cpp" />
     <ClCompile Include="dayTwo.cpp" />
     <ClCompile Include="dayTwoPartTwo.cpp" />
     <ClCompile Include="main.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="dayNinePartTwo.h" />
     <ClInclude Include="dayTenPartTwo.h" />
     <ClInclude Include="dayTwelve.h" />
+    <ClInclude Include="dayTwelvePartTwo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dayTen.h" />
