@@ -1,10 +1,10 @@
 #include <iostream>
-#include "dayTwelvePartTwo.h"
+#include "dayThirteen.h"
 
 int main() {
 	std::cout << "Running program... " << '\n';
 
-	DayTwelvePartTwo::dayTwelvePartTwo();
+	DayThirteen::dayThirteen();
 
 	return 0;
 }
