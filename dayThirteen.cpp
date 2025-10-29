@@ -12,97 +12,95 @@ namespace DayThirteen
 		using longg_t = long long;
 		struct ButtonData { longg_t aX; longg_t aY; longg_t bX; longg_t bY; longg_t prizeX; longg_t prizeY; };
 		ButtonData parseButtonSet(const std::string& buttonA, const std::string& buttonB, const std::string& prize);
-		bool isAMovementMoreEfficientThanB(const longg_t aMovement, const longg_t bMovement);
-		longg_t calcDirTokensSingleButton(const longg_t movement, const longg_t prize, const longg_t cost);
+		bool isAAdjustedHypotenuseLarger();
+		bool isValidComboForEndCoord(const longg_t aCount, const longg_t bCount, const longg_t prizeX, const longg_t prizeY);
+		bool isSingleButtonChoiceValid(const longg_t x, const longg_t y, const longg_t prizeX, const longg_t prizeY);
+		longg_t calcTruncatedStartCount(const longg_t x, const longg_t y, const longg_t prizeX, const longg_t prizeY);
+		longg_t calcTokensFromCounts(std::pair<longg_t, longg_t> counts);
+		bool hasOverShotEndCoord(const longg_t aCount, const longg_t bCount, const longg_t prizeX, const longg_t prizeY);
 
-		const bool toLog = false; // true   false
+		const bool toLog = true; // true   false
 		const longg_t kAButtonCost = 3;
 		const longg_t kBButtonCost = 1;
 		const int kMaxIter = 1'000'000;
 
-		bool doesMovementWork(const longg_t otherOrthoAMove, const longg_t otherOrthoACount,
-			const longg_t otherOrthoBMove, const longg_t otherOrthoBCount, const longg_t otherPrizeCoord) {
-			return (otherOrthoAMove * otherOrthoACount) + (otherOrthoBMove * otherOrthoBCount) == otherPrizeCoord;
-		}
+		ButtonData singleMachine; // Using globals is not advisable, used here to reduce excessive argument passing
 
-		std::pair<longg_t, longg_t> getMovementsCount(const longg_t fastMovement, const longg_t slowMovement, const longg_t prize,
-			const longg_t otherAMovement, const longg_t otherBMovement, const longg_t otherPrize, const bool isADirMoreEfficient) 
-		{
-			longg_t countFast = (prize / fastMovement) + 1;
-			if (countFast > 100) {
-				countFast = 101;
-			}
-			longg_t countSlow = 0;
+		std::pair<longg_t, longg_t> calcMultiButtonCounts(const bool isAMoreEfficient) {
+			longg_t fastCount = isAMoreEfficient
+				? calcTruncatedStartCount(singleMachine.aX, singleMachine.aY, singleMachine.prizeX, singleMachine.prizeY) + 1
+				: calcTruncatedStartCount(singleMachine.bX, singleMachine.bY, singleMachine.prizeX, singleMachine.prizeY) + 1;
+			if (fastCount > 100) fastCount = 100;
+			longg_t slowCount = 0;
 
-			longg_t& aCount = isADirMoreEfficient ? countFast : countSlow;
-			longg_t& bCount = isADirMoreEfficient ? countSlow : countFast;
+			longg_t& aCount = isAMoreEfficient ? fastCount : slowCount;
+			longg_t& bCount = isAMoreEfficient ? slowCount : fastCount;
 
-			if (toLog) std::cout << "Starting calc: Fast movement: " << fastMovement << ", Slow movement: " << slowMovement << ", Target prize : " << prize << ", Initial countFast: " << countFast << "\n";
+			longg_t slowCountCopy;
 
-			for (countFast; countFast >= 0; countFast--) // quick sort or a similar algo would be faster. This project is focused on solving not hyperoptimizing for high throughput.
+			for (; fastCount >= 0; --fastCount)
 			{
-				++countSlow;
-				if (countSlow > 100) return std::make_pair(-1,-1);
-				longg_t prizeAttempt = (fastMovement * countFast) + (slowMovement * countSlow);
-					if (toLog) std::cout << "\nFast: " << countFast << ", Slow: " << countSlow << ", Attempt: " << prizeAttempt << ", Target: " << prize << ", Diff: " << (prizeAttempt - prize) << '\n';
-				if (prizeAttempt == prize) {
-					if (doesMovementWork(otherAMovement, aCount, otherBMovement, bCount, otherPrize)) break;
-				}
+				if (isValidComboForEndCoord(aCount, bCount, singleMachine.prizeX, singleMachine.prizeY)) break;
+				++slowCount;
+				if (slowCount > 100) break;
 
-				longg_t slowCountCopy = countSlow;
-				longg_t diff = prizeAttempt - prize;
-				slowCountCopy += (std::abs(diff) / slowMovement) - 1;
+				slowCountCopy = slowCount++;
 				int iter = 0;
-				while (prizeAttempt < prize) {
-					if (iter > kMaxIter) throw std::runtime_error("max iter breached");
-					++slowCountCopy;
-					prizeAttempt = (fastMovement * countFast) + (slowMovement * slowCountCopy);
-					//	if (toLog) std::cout << "  " << slowCountCopy << "|" << prizeAttempt << "|" << (prizeAttempt - prize) << " ";
+				while (!hasOverShotEndCoord(aCount, bCount, singleMachine.prizeX, singleMachine.prizeY)) {
 					++iter;
+					if (iter > kMaxIter) throw std::runtime_error("max iter breached");
+					if (isValidComboForEndCoord(aCount, bCount, singleMachine.prizeX, singleMachine.prizeY)) {
+						return std::make_pair(aCount, bCount);
+					}
+					++slowCount;
+					if (slowCount > 100) break;
+					if (toLog && slowCount == 100 && fastCount == 100) { 
+						std::cout << "\nDouble 100's !\n"; }
 				}
-
-				if (prizeAttempt == prize) {
-					countSlow = slowCountCopy;
-					if (doesMovementWork(otherAMovement, aCount, otherBMovement, bCount, otherPrize)) break;
-				}
+				slowCount = slowCountCopy;
 			}
-			if (countFast == -1) countFast = 0; // post for loop offset, zero loop still needed
-			if (countFast == 0 && ((countSlow * slowMovement) != prize)) return std::make_pair(-1, -1); // no valid combo
-			return std::make_pair(countFast, countSlow);
+			if (slowCount > 100 || fastCount < 0) {
+				if (toLog) std::cout << "Failed: " << (slowCount > 100 ? "SlowCount exceeded 100" : "FastCount went negative")
+					<< " (SlowCount=" << slowCount << ", FastCount=" << fastCount << ")\n";
+				return std::make_pair(-1, -1);
+			}
+			if (isValidComboForEndCoord(aCount, bCount, singleMachine.prizeX, singleMachine.prizeY)) return std::make_pair(aCount, bCount);
+			return std::make_pair(-1, -1);
 		}
 
-		longg_t calcTotalTokensForBothButtons() {
-
-		}
-
-		longg_t getDirectionTokensForMachine(const longg_t aMovement, const longg_t bMovement, const longg_t prizeForMovement, const bool isADirMoreEfficient,
-			const longg_t otherAMovement, const longg_t otherBMovement, const longg_t otherPrize) {
-			if (isADirMoreEfficient) { // start with A
-				if (prizeForMovement % aMovement == 0) {
-					return calcDirTokensSingleButton(aMovement, prizeForMovement, kAButtonCost);
+		std::pair<longg_t, longg_t> getDependentCountsForMachine(const bool isAMoreEfficient) {
+			if (isAMoreEfficient) { // start with A
+				if (isSingleButtonChoiceValid(singleMachine.aX, singleMachine.aY, singleMachine.prizeX, singleMachine.prizeY)) {
+					longg_t aCount = calcTruncatedStartCount(singleMachine.aX, singleMachine.aY, singleMachine.prizeX, singleMachine.prizeY);
+					if (aCount < 101) return std::make_pair(aCount, 0);
 				}
-				auto movementsCount = getMovementsCount(aMovement, bMovement, prizeForMovement, otherAMovement, otherBMovement, otherPrize, isADirMoreEfficient);
-				if (toLog) std::cout << "\n\nDir: A->B, Fast count: " << movementsCount.first << ", Slow count: " << movementsCount.second << ", Prize: " << prizeForMovement << '\n';
-				if (movementsCount.first < 0) return 0;
-				return (movementsCount.first * kAButtonCost) + (movementsCount.second * kBButtonCost);
+				return calcMultiButtonCounts(true);
 			}
 			else {
-				if (prizeForMovement % bMovement == 0) {
-					return calcDirTokensSingleButton(bMovement, prizeForMovement, kBButtonCost);
+				if (isSingleButtonChoiceValid(singleMachine.bX, singleMachine.bY, singleMachine.prizeX, singleMachine.prizeY)) {
+					longg_t bCount = calcTruncatedStartCount(singleMachine.bX, singleMachine.bY, singleMachine.prizeX, singleMachine.prizeY);
+					if (bCount < 101) return std::make_pair(bCount, 0);
 				}
-				auto movementsCount = getMovementsCount(bMovement, aMovement, prizeForMovement, otherAMovement, otherBMovement, otherPrize, isADirMoreEfficient);
-				if (toLog) std::cout << "\n\nDir: B->A, Fast count: " << movementsCount.first << ", Slow count: " << movementsCount.second << ", Prize: " << prizeForMovement << '\n';
-				if (movementsCount.first < 0) return 0;
-				return (movementsCount.first * kBButtonCost) + (movementsCount.second * kAButtonCost);
+				return calcMultiButtonCounts(false);
 			}
 		}
 
-		longg_t calcalateTotalTokensForMachine(const ButtonData singleMachineData) {
-			bool isAXMoreEfficient = isAMovementMoreEfficientThanB(singleMachineData.aX, singleMachineData.bX);
-			bool isAYMoreEfficient = isAMovementMoreEfficientThanB(singleMachineData.aY, singleMachineData.bY);
+		longg_t getTotalTokensForMachine(const ButtonData singleMachine) {
+			if (toLog) std::cout << "\nMachine: A(X=" << singleMachine.aX << ",Y=" << singleMachine.aY << ") B(X=" << singleMachine.bX << ",Y=" << singleMachine.bY << ") Prize(X=" << singleMachine.prizeX << ",Y=" << singleMachine.prizeY << ")\n";
 
-			return getDirectionTokensForMachine(singleMachineData.aX, singleMachineData.bX, singleMachineData.prizeX,
-				isAXMoreEfficient, singleMachineData.aY, singleMachineData.bY, singleMachineData.prizeY);
+			bool isAMoreEfficient = isAAdjustedHypotenuseLarger();
+
+			if (toLog) std::cout << "Strategy: Using " << (isAMoreEfficient ? "A" : "B") << " as primary button\n";
+
+			std::pair<longg_t, longg_t> counts = getDependentCountsForMachine(isAMoreEfficient);
+			if (counts.first < 0) return 0;
+
+			if (toLog) {
+				if (counts.first < 0 || counts.second < 0) std::cout << "Result: No solution found\n";
+				else std::cout << "Result: A=" << counts.first << " B=" << counts.second << " Cost=" << calcTokensFromCounts(counts) << "\n";
+			}
+
+			return calcTokensFromCounts(counts);
 		}
 
 		void handleFile(std::ifstream& inputFile)
@@ -110,21 +108,25 @@ namespace DayThirteen
 			if (inputFile.is_open()) {
 				std::string buttonA, buttonB, prize;
 				std::string line;
+				int lineCount = 1;
 				longg_t totalTokens = 0;
 				while (getline(inputFile, line)) {
+					++lineCount;
 					if (line.empty()) {
 						continue;
 					}
 
 					buttonA = line;
 					getline(inputFile, buttonB);
+					++lineCount;
 					getline(inputFile, prize);
+					++lineCount;
 
-					ButtonData singleMachineData = parseButtonSet(buttonA, buttonB, prize);
+					singleMachine = parseButtonSet(buttonA, buttonB, prize);
 
-					longg_t toAdd = calcalateTotalTokensForMachine(singleMachineData);
+					longg_t toAdd = getTotalTokensForMachine(singleMachine);
 
-					if (toLog) std::cout << "Added " << toAdd << " to: " << totalTokens << '\n';
+					if (toLog) std::cout << lineCount << ": Added " << toAdd << " to: " << totalTokens << " for (" << singleMachine.prizeX << ',' << singleMachine.prizeY << ")\n";
 
 					totalTokens += toAdd;
 				}
@@ -142,14 +144,35 @@ namespace DayThirteen
 			}
 		}
 
-		longg_t calcDirTokensSingleButton(const longg_t movement, const longg_t prize, const longg_t cost) {
-			if (prize % movement != 0) throw std::runtime_error("Expecting single button");
-			longg_t count = prize / movement;
-			return count * cost;
+		longg_t calcTokensFromCounts(std::pair<longg_t, longg_t> counts) {
+			return (counts.first * kAButtonCost) + (counts.second * kBButtonCost);
 		}
 
-		bool isAMovementMoreEfficientThanB(const longg_t aMovement, const longg_t bMovement) {
-			return aMovement * kBButtonCost > bMovement * kAButtonCost; // dodges inaccuracies from division conversions in case of very large numbers
+		bool isSingleButtonChoiceValid(const longg_t x, const longg_t y, const longg_t prizeX, const longg_t prizeY) {
+			return ((prizeX * prizeX) + (prizeY * prizeY)) % ((x * x) + (y * y)) == 0;
+		}
+
+		longg_t calcTruncatedStartCount(const longg_t x, const longg_t y, const longg_t prizeX, const longg_t prizeY) {
+			return ((prizeX * prizeX) + (prizeY * prizeY)) / ((x * x) + (y * y));
+		}
+
+		bool hasOverShotEndCoord(const longg_t aCount, const longg_t bCount, const longg_t prizeX, const longg_t prizeY) {
+			longg_t totalXMovement = (aCount * singleMachine.aX) + (bCount * singleMachine.bX);
+			longg_t totalYMovement = (aCount * singleMachine.aY) + (bCount * singleMachine.bY);
+			return prizeX < totalXMovement || prizeY < totalYMovement;
+		}
+
+		bool isValidComboForEndCoord(const longg_t aCount, const longg_t bCount, const longg_t prizeX, const longg_t prizeY) {
+			longg_t totalXMovement = (aCount * singleMachine.aX) + (bCount * singleMachine.bX);
+			longg_t totalYMovement = (aCount * singleMachine.aY) + (bCount * singleMachine.bY);
+			return prizeX == totalXMovement && prizeY == totalYMovement;
+		}
+
+		bool isAAdjustedHypotenuseLarger() {
+			longg_t aHypotenuseSquared = (singleMachine.aX * singleMachine.aX) + (singleMachine.aY * singleMachine.aY);
+			longg_t bHypotenuseSquared = (singleMachine.bX * singleMachine.bX) + (singleMachine.bY * singleMachine.bY);
+
+			return aHypotenuseSquared * kBButtonCost > bHypotenuseSquared * kAButtonCost;
 		}
 
 		ButtonData parseButtonSet(const std::string& buttonA, const std::string& buttonB, const std::string& prize) {
@@ -201,3 +224,4 @@ namespace DayThirteen
 // 44022 too high
 // 24338 too low
 // 27665 too low
+// 20442 for Hypotenuse method
