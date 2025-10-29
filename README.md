@@ -1,6 +1,6 @@
 File organization in Visual Studio happens through filters, which do not translate as folders in github.
 
-Completions: (date: 27/10)
+Completions: (date: 29/10)
 
 | Day | Part One | Part Two |
 |-----|----------|----------|
@@ -16,7 +16,7 @@ Completions: (date: 27/10)
 | 10  | ✅       | ✅       |
 | 11  | ✅       | ✅       |
 | 12  | ✅       | 🚧       |
-| 13  | ❌       | ❌       |
+| 13  | 🚧       | ❌       |
 | 14  | ❌       | ❌       |
 | 15  | ❌       | ❌       |
 | 16  | ❌       | ❌       |
