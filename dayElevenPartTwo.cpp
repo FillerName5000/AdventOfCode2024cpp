@@ -5,7 +5,7 @@
 //#include <vector>
 //#include <unordered_map> // unordered map requires hash function, which BigInt.hpp does not have
 //#include <map>
-//#include "BigInt.hpp"
+//#include "BigInt.hpp" // https://github.com/faheel/BigInt
 //
 ///** GENERAL NOTE:
 //*
