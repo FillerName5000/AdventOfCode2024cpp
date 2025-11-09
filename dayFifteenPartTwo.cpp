@@ -40,12 +40,12 @@ namespace DayFifteenPartTwo
 		Direction getDirectionFromAToB(const coord_t& a, const coord_t& b);
 		char directionToChar(Direction dir);
 		void updateBotPos(const coord_t& newPos);
-		size_t calcTotal(const size_t kLen);
+		size_t calcTotal(const size_t kXLen, const size_t kYLen);
 
-		const bool toLog = true; // true   false
+		const bool toLog = false; // true   false
 
 		const int kMaxIter = 10'000;
-		const size_t kYLenTest = 7;
+		const size_t kYLenTest = 10;
 		const size_t kYLenFull = 50;
 
 		char_square_t grid;
@@ -70,21 +70,13 @@ namespace DayFifteenPartTwo
 				grid[coord.first + offset][coord.second] = currentChar;
 				grid[coord.first][coord.second] = GridChar::Empty;
 			}
+
+			//coutCharSquareAsGrid("");
 		}
 
 		void moveBoxesVertically(const std::vector<std::vector<coord_t>>& rowsToMove, const Direction boxDir, const size_t kXLen, const size_t kYLen) {
-			if (boxDir == Direction::Up) {
-				for (const auto& row : rowsToMove) {
-					moveRowVertically(row, boxDir);
-				}
-			}
-			else if (boxDir == Direction::Down) {
-				for (auto it = rowsToMove.rbegin(); it != rowsToMove.rend(); ++it) {
-					moveRowVertically(*it, boxDir);
-				}
-			}
-			else {
-				throw std::runtime_error("Invalid vertical direction");
+			for (auto it = rowsToMove.rbegin(); it != rowsToMove.rend(); ++it) {
+				moveRowVertically(*it, boxDir);
 			}
 		}
 
@@ -113,57 +105,124 @@ namespace DayFifteenPartTwo
 			return hasBoxes ? PossibleNextRowState::HasMoreBoxes : PossibleNextRowState::FullyEmpty;
 		}
 
-		std::vector<coord_t> getRowBoxCoords(const coord_t& startPos, const size_t kXLen, const size_t kYLen) {
-			std::vector<coord_t> currentRowOfCoords;
-			coord_t leftPos = startPos;
-			coord_t rightPos = startPos;
+		std::vector<coord_t> getRowBoxCoordsAboveOrBelowBoxes(const std::vector<coord_t>& currentRowOfCoords, const size_t kXLen, const size_t kYLen, const Direction boxDir) {
+			if (boxDir != Direction::Up && boxDir != Direction::Down) throw std::runtime_error("Invalid direction");
+			std::vector<coord_t> boxCoords;
 
-			while (isValidCoord(kXLen, kYLen, leftPos)
-				&& grid[leftPos.first][leftPos.second] != GridChar::Wall
-				&& grid[leftPos.first][leftPos.second] != GridChar::Empty)
-			{
-				currentRowOfCoords.push_back(leftPos);
-				leftPos = getNextCoord(GridChar::Left, leftPos);
+			for (const coord_t& coord : currentRowOfCoords) {
+				coord_t verticalCoord = getNextCoord(directionToChar(boxDir), coord);
+				if (isValidCoord(kXLen, kYLen, verticalCoord)) {
+					char verticalChar = grid[verticalCoord.first][verticalCoord.second];
+					if (verticalChar == GridChar::LeftBigBox || verticalChar == GridChar::RightBigBox) {
+						boxCoords.push_back(verticalCoord);
+					}
+					// wall checks happen elsewhere
+				}
+
+				coord_t diagLeft, diagRight;
+				if (boxDir == Direction::Up) {
+					diagLeft = { coord.first - 1, coord.second - 1 };
+					diagRight = { coord.first - 1, coord.second + 1 };
+				}
+				else if (boxDir == Direction::Down) {
+					diagLeft = { coord.first + 1, coord.second - 1 };
+					diagRight = { coord.first + 1, coord.second + 1 };
+				}
+
+				if (isValidCoord(kXLen, kYLen, diagLeft)) {
+					char diagLeftChar = grid[diagLeft.first][diagLeft.second];
+					if (diagLeftChar == GridChar::LeftBigBox) {
+						boxCoords.push_back(diagLeft);
+					}
+				}
+				if (isValidCoord(kXLen, kYLen, diagRight)) {
+					char diagRightChar = grid[diagRight.first][diagRight.second];
+					if (diagRightChar == GridChar::RightBigBox) {
+						boxCoords.push_back(diagRight);
+					}
+				}
 			}
 
-			while (isValidCoord(kXLen, kYLen, rightPos)
-				&& grid[rightPos.first][rightPos.second] != GridChar::Wall
-				&& grid[rightPos.first][rightPos.second] != GridChar::Empty)
-			{
-				currentRowOfCoords.push_back(rightPos);
-				rightPos = getNextCoord(GridChar::Right, rightPos);
-			}
-
-			std::sort(currentRowOfCoords.begin(), currentRowOfCoords.end(), [](const coord_t& a, const coord_t& b) {
+			std::sort(boxCoords.begin(), boxCoords.end(), [](const coord_t& a, const coord_t& b) {
 				return a.second < b.second;
-			});
+				});
 
-			return currentRowOfCoords;
+			boxCoords.erase(std::unique(boxCoords.begin(), boxCoords.end()), boxCoords.end()); // perf tradeoff between single big operation and constant runthroughs pre-insertion
+			// order matters so set duplicate fixing not applicable
+			return boxCoords;
 		}
 
-		void handleVerticalBoxDir(const size_t kXLen, const size_t kYLen, const coord_t& botPos, const Direction boxDir)
+		std::vector<coord_t> createRowFromBigBox(const std::pair<coord_t, coord_t>& firstBox) {
+			std::vector<coord_t> row;
+
+			coord_t start = firstBox.first;
+			coord_t end = firstBox.second;
+
+			if (start.second > end.second) {
+				std::swap(start, end); //LtoR
+			}
+
+			for (size_t col = start.second; col <= end.second; ++col) {
+				row.emplace_back(start.first, col);
+			}
+
+			return row;
+		}
+
+		std::pair<coord_t, coord_t> getSingleBigBoxCoords(const coord_t& origPos, const Direction boxDir, const size_t kXLen, const size_t kYLen) {
+			if (boxDir != Direction::Up && boxDir != Direction::Down) throw std::runtime_error("Invalid dir");
+
+			coord_t verticalCoord = getNextCoord(directionToChar(boxDir), origPos);
+			if (!isValidCoord(kXLen, kYLen, verticalCoord)) throw std::runtime_error("Coordinate out of bounds in getBigBoxCoords.");
+
+			char verticalChar = grid[verticalCoord.first][verticalCoord.second];
+			if (verticalChar == GridChar::RightBigBox) {
+				coord_t leftCoord = getNextCoord(GridChar::Left, verticalCoord);
+				if (!isValidCoord(kXLen, kYLen, leftCoord) || grid[leftCoord.first][leftCoord.second] != GridChar::LeftBigBox) {
+					throw std::runtime_error("Disjointed char");
+				}
+				return { leftCoord, verticalCoord };
+			}
+			else if (verticalChar == GridChar::LeftBigBox) {
+				coord_t rightCoord = getNextCoord(GridChar::Right, verticalCoord);
+				if (!isValidCoord(kXLen, kYLen, rightCoord) || grid[rightCoord.first][rightCoord.second] != GridChar::RightBigBox) {
+					throw std::runtime_error("Disjointed char");
+				}
+				return { verticalCoord, rightCoord };
+			}
+			return std::make_pair(std::make_pair(-1, -1), std::make_pair(-1, -1));
+		}
+
+		void handleVerticalBoxDir(const size_t kXLen, const size_t kYLen, const coord_t& startBotPos, const Direction boxDir)
 		{
 			std::vector<std::vector<coord_t>> rowsToMove;
 			int iter = 0;
-			coord_t nextBotPos = botPos;
 			bool exitLoop = false;
 			bool canMove = true;
 
 			while (!exitLoop && iter < kMaxIter) {
 				++iter;
-				nextBotPos = getNextCoord(directionToChar(boxDir), nextBotPos);
-				std::vector<coord_t> currentRowOfCoords = getRowBoxCoords(nextBotPos, kXLen, kYLen);
-				rowsToMove.push_back(currentRowOfCoords);
+				std::vector<coord_t> nextRowToCheck;
 
-				switch (getNextRowState(currentRowOfCoords, kXLen, kYLen, boxDir)) {
+				if (iter == 1) {
+					std::pair<coord_t, coord_t> firstBox = getSingleBigBoxCoords(startBotPos, boxDir, kXLen, kYLen);
+					nextRowToCheck = createRowFromBigBox(firstBox);
+				}
+				else {
+					nextRowToCheck = getRowBoxCoordsAboveOrBelowBoxes(rowsToMove.back(), kXLen, kYLen, boxDir);
+				}
+
+				switch (getNextRowState(nextRowToCheck, kXLen, kYLen, boxDir)) {
 				case PossibleNextRowState::HasMoreBoxes:
-					// keep going
+					rowsToMove.push_back(nextRowToCheck);
 					break;
 				case PossibleNextRowState::Blocker:
+					if (toLog) std::cout << "Blocker found \n";
 					exitLoop = true;
 					canMove = false;
 					break;
 				case PossibleNextRowState::FullyEmpty:
+					rowsToMove.push_back(nextRowToCheck);
 					exitLoop = true;
 					canMove = true;
 					break;
@@ -175,6 +234,7 @@ namespace DayFifteenPartTwo
 			if (canMove)
 			{
 				moveBoxesVertically(rowsToMove, boxDir, kXLen, kYLen);
+				updateBotPos(getNextCoord(directionToChar(boxDir), startBotPos));
 			}
 			// do nothing
 		}
@@ -182,29 +242,30 @@ namespace DayFifteenPartTwo
 #pragma region horiz
 		void moveBoxesHorizontally(const std::vector<coord_t> bigBoxCoords, const Direction boxDir) {
 			if (boxDir == Direction::Left || boxDir == Direction::Right) {
-				size_t coordsSize = bigBoxCoords.size();
+				size_t i = bigBoxCoords.size() - 1;
 				size_t underFlow = SIZE_MAX;
 				bool isLeftBox = (boxDir == Direction::Left);
 
-				for (size_t i = coordsSize - 1; i > underFlow; --i) {
+				for (i; i < underFlow; --i) {
 					const coord_t& currentCoord = bigBoxCoords[i];
 					grid[currentCoord.first][currentCoord.second] = isLeftBox ? GridChar::LeftBigBox : GridChar::RightBigBox;
 					isLeftBox = !isLeftBox;
 				}
 
-				const coord_t& firstCoord = bigBoxCoords.front();
-				grid[firstCoord.first][firstCoord.second] = GridChar::Empty;
-				updateBotPos(bigBoxCoords.back());
+				updateBotPos(bigBoxCoords[1]);
 			}
 			else {
 				throw std::runtime_error("Invalid horizontal direction");
 			}
 		}
 
-		void handleHorizontalBoxDir(const size_t kXLen, const size_t kYLen, const coord_t firstBoxPos, std::vector<coord_t>& bigBoxCoords, const Direction boxDir)
+		void handleHorizontalBoxDir(const size_t kXLen, const size_t kYLen, const coord_t botPos, const coord_t firstBoxPos, const Direction boxDir)
 		{
 			int iter = 0;
 			bool endCharIsEmpty = false;
+			std::vector<coord_t> bigBoxCoords;
+			bigBoxCoords.push_back(botPos);
+
 			coord_t currentPos = firstBoxPos;
 			while (isValidCoord(kXLen, kYLen, currentPos) || iter > kMaxIter) {
 				++iter;
@@ -236,13 +297,11 @@ namespace DayFifteenPartTwo
 
 		void handleBoxMovement(const coord_t botPos, const coord_t firstBoxPos, const Direction boxDir, const size_t kXLen, const size_t kYLen)
 		{
-			std::vector<coord_t> bigBoxCoords;
-			bigBoxCoords.push_back(firstBoxPos);
 			bool endCharIsEmpty = false;
 
 			if (boxDir == Direction::Left || boxDir == Direction::Right)
 			{
-				handleHorizontalBoxDir(kXLen, kYLen, firstBoxPos, bigBoxCoords, boxDir);
+				handleHorizontalBoxDir(kXLen, kYLen, botPos, firstBoxPos, boxDir);
 			}
 			else {
 				handleVerticalBoxDir(kXLen, kYLen, botPos, boxDir);
@@ -256,7 +315,10 @@ namespace DayFifteenPartTwo
 			{
 				if (toLog) std::cout << dir << '\n';
 				coord_t nextBotPos = getNextCoord(dir, botPos);
-				if (!isValidCoord(kXLen, kYLen, nextBotPos)) throw std::runtime_error("Bot wants to escape wall containment");
+				if (!isValidCoord(kXLen, kYLen, nextBotPos)) {
+					coutCharSquareAsGrid("ERROR: \n");
+					throw std::runtime_error("Bot wants to escape wall containment");
+				}
 
 				char nextPosChar = grid[nextBotPos.first][nextBotPos.second];
 				switch (nextPosChar) {
@@ -305,7 +367,9 @@ namespace DayFifteenPartTwo
 
 				inputFile.close(); // automatically happens when going out of scope but no longer needed. More about explicitness.
 
-				//	std::cout << "Total: " << calcTotal(kLen) << '\n';
+				coutCharSquareAsGrid("");
+
+				std::cout << "Total: " << calcTotal(kXLen, kYLen) << '\n';
 
 				std::cout << "\nFinished running program\n";
 			}
@@ -320,7 +384,7 @@ namespace DayFifteenPartTwo
 			grid[botPos.first][botPos.second] = GridChar::Empty;
 			grid[newPos.first][newPos.second] = GridChar::Bot;
 			botPos = newPos;
-			if (toLog) coutCharSquareAsGrid("++E: State: \n");
+			if (toLog) coutCharSquareAsGrid("++E: State: Bot moved to [" + std::to_string(botPos.first) + "," + std::to_string(botPos.second) + "]\n");
 		}
 		char directionToChar(Direction dir) {
 			switch (dir) {
@@ -380,19 +444,19 @@ namespace DayFifteenPartTwo
 #pragma endregion
 
 #pragma region calcs
-		size_t calcTotal(const size_t kLen)
+		size_t calcTotal(const size_t kXLen, const size_t kYLen)
 		{
 			const size_t gpsMult = 100;
 			size_t total = 0;
 
-			/*for (size_t y = 0; y < kLen; ++y) {
-				for (size_t x = 0; x < kLen; ++x) {
-					if (grid[y][x] == GridChar::Box) {
+			for (size_t y = 0; y < kYLen; ++y) {
+				for (size_t x = 0; x < kXLen; ++x) {
+					if (grid[y][x] == GridChar::LeftBigBox) {
 						if (toLog) std::cout << "Box at [" << y << "," << x << "] adds " << (y * gpsMult) + x << '\n';
 						total += (y * gpsMult) + x;
 					}
 				}
-			}*/
+			}
 
 			return total;
 		}
@@ -455,7 +519,7 @@ namespace DayFifteenPartTwo
 	void dayFifteenPartTwo() {
 		std::system("cls"); // clear terminal pre-boot
 		std::cout << "Running program DayFifteenPartTwo" << '\n';
-		const bool isFullFile = false; // true   false
+		const bool isFullFile = true; // true   false
 		const size_t kYLen = isFullFile ? kYLenFull : kYLenTest;
 		const size_t kXLen = kYLen * 2;
 
