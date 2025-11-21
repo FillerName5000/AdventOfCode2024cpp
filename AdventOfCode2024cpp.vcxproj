@@ -141,6 +141,7 @@
     <ClCompile Include="dayNinePartTwo.cpp" />
     <ClCompile Include="daySeven.cpp" />
     <ClCompile Include="daySevenPartTwo.cpp" />
+    <ClCompile Include="daySeventeen.cpp" />
     <ClCompile Include="daySix.cpp" />
     <ClCompile Include="daySixPartTwo.cpp" />
     <ClCompile Include="daySixteen.cpp" />
@@ -175,6 +176,8 @@
     <Text Include="dayNineFull.txt" />
     <Text Include="dayNineTest.txt" />
     <Text Include="daySevenFull.txt" />
+    <Text Include="DaySeventeenFull.txt" />
+    <Text Include="DaySeventeenTest.txt" />
     <Text Include="daySevenTest.txt" />
     <Text Include="daySixFull.txt" />
     <Text Include="daySixteenFull.txt" />
@@ -217,6 +220,7 @@
     <ClInclude Include="dayFourteenPartTwo.h" />
     <ClInclude Include="dayNine.h" />
     <ClInclude Include="dayNinePartTwo.h" />
+    <ClInclude Include="daySeventeen.h" />
     <ClInclude Include="daySixteen.h" />
     <ClInclude Include="daySixteenPartTwo.h" />
     <ClInclude Include="dayTenPartTwo.h" />
