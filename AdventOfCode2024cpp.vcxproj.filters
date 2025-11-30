@@ -228,6 +228,9 @@
     <ClCompile Include="daySeventeen.cpp">
       <Filter>Source Files\daySeventeen</Filter>
     </ClCompile>
+    <ClCompile Include="daySeventeenPartTwo.cpp">
+      <Filter>Source Files\daySeventeen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="day1test.txt">
@@ -428,6 +431,9 @@
       <Filter>Header Files\daySixteen</Filter>
     </ClInclude>
     <ClInclude Include="daySeventeen.h">
+      <Filter>Header Files\daySeventeen</Filter>
+    </ClInclude>
+    <ClInclude Include="daySeventeenPartTwo.h">
       <Filter>Header Files\daySeventeen</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,15 +3,17 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <bitset>
 
 // Literal Operand Land // Combo Operand Cand
 namespace DaySeventeen
 {
 	namespace {
-		using instruction_set_t = std::vector<std::pair<int, int>>;
+		using llong_t = long long;
+		using instruction_set_t = std::vector<std::pair<llong_t, llong_t>>;
 		void coutState();
 		void coutCreateInstructionSet();
-		enum class OpCode : int {
+		enum class OpCode : llong_t {
 			Adv = 0, // A / Cand^2 truncated to int -> A
 			Bxl = 1, // bitwise XOR B & Land -> B
 			Bst = 2, // Cabd % 8 (aka only last three bits) -> B
@@ -22,17 +24,17 @@ namespace DaySeventeen
 			Cdv = 7  // A / Cand^2 truncated to int -> C
 		};
 
-		const bool toLog = true; // true   false
-		const int kMaxIter = 1'000'00;
+		const bool toLog = false; // true   false
+		const llong_t kMaxIter = 1'000'00;
 #pragma region defs
-		int regA = 0;
-		int regB = 0;
-		int regC = 0;
+		llong_t regA = 0;
+		llong_t regB = 0;
+		llong_t regC = 0;
 		instruction_set_t instructionSet;
 		size_t instructionIndex = 0;
 		std::string output = "";
 #pragma endregion
-		int getComboOperand(int operand)
+		llong_t getComboOperand(llong_t operand)
 		{
 			switch (operand) {
 			case 0:
@@ -52,20 +54,20 @@ namespace DaySeventeen
 			}
 		}
 
-		void executeInstruction(std::pair<int, int> instruction)
+		void executeInstruction(std::pair<llong_t, llong_t> instruction)
 		{
-			if (instruction.first < static_cast<int>(OpCode::Adv) || // best comparison to a < .size() call for cpp enum
-				instruction.first > static_cast<int>(OpCode::Cdv)) {
+			if (instruction.first < static_cast<llong_t>(OpCode::Adv) || // best comparison to a < .size() call for cpp enum
+				instruction.first > static_cast<llong_t>(OpCode::Cdv)) {
 				throw std::runtime_error("Invalid OpCode value");
 			}
 
 			OpCode opCode = static_cast<OpCode>(instruction.first);
-			int operand = instruction.second;
+			llong_t operand = instruction.second;
 
 			if (toLog) std::cout << "Operating: {" << instruction.first << ", " << instruction.second << "}\n";
 			switch (opCode) {
 			case OpCode::Adv: {
-				int denA = 1 << getComboOperand(operand); // more efficient 2^int operation through left bitshift
+				llong_t denA = 1 << getComboOperand(operand); // more efficient 2^int operation through left bitshift
 				if (denA == 0) {
 					throw std::runtime_error("Division by zero in Adv instruction");
 				}
@@ -91,12 +93,12 @@ namespace DaySeventeen
 				regB = regB ^ regC;
 				break;
 			case OpCode::Out: {
-				int result = getComboOperand(operand) % 8;
+				llong_t result = getComboOperand(operand) % 8;
 				output += std::to_string(result) + ","; // can only be single digit
 				break;
 			}
 			case OpCode::Bdv: {
-				int denominator = 1 << getComboOperand(operand); // more efficient 2^int operation through left bitshift
+				llong_t denominator = 1 << getComboOperand(operand); // more efficient 2^int operation through left bitshift
 				if (denominator == 0) {
 					throw std::runtime_error("Division by zero in Adv instruction");
 				}
@@ -104,7 +106,7 @@ namespace DaySeventeen
 				break;
 			}
 			case OpCode::Cdv: {
-				int denominator = 1 << getComboOperand(operand); // more efficient 2^int operation through left bitshift
+				llong_t denominator = 1 << getComboOperand(operand); // more efficient 2^int operation through left bitshift
 				if (denominator == 0) {
 					throw std::runtime_error("Division by zero in Adv instruction");
 				}
@@ -117,17 +119,17 @@ namespace DaySeventeen
 			if (toLog) coutState();
 		}
 
-		void parseInputLine(int i, std::string line)
+		void parseInputLine(llong_t i, std::string line)
 		{
 			switch (i) {
 			case 1:
-				regA = std::stoi(line.substr(line.find(":") + 1));
+				regA = std::stoll(line.substr(line.find(":") + 1));
 				return;
 			case 2:
-				regB = std::stoi(line.substr(line.find(":") + 1));
+				regB = std::stoll(line.substr(line.find(":") + 1));
 				return;
 			case 3:
-				regC = std::stoi(line.substr(line.find(":") + 1));
+				regC = std::stoll(line.substr(line.find(":") + 1));
 				return;
 			case 4:
 				return;
@@ -137,10 +139,10 @@ namespace DaySeventeen
 				line = line.substr(startPos);
 				size_t pos = 0;
 				while ((pos = line.find(",")) != std::string::npos) {
-					int opCode = std::stoi(line.substr(0, pos));
+					llong_t opCode = std::stoi(line.substr(0, pos));
 					line.erase(0, pos + 1);
 					pos = line.find(",");
-					int operand = std::stoi(line.substr(0, pos));
+					llong_t operand = std::stoi(line.substr(0, pos));
 					line.erase(0, pos + 1);
 					instructionSet.emplace_back(opCode, operand);
 				}
@@ -156,9 +158,13 @@ namespace DaySeventeen
 		{
 			if (inputFile.is_open()) {
 				std::string line;
-				int i = 1;
+				llong_t i = 1;
+				llong_t startingRegA = 0;
 				while (getline(inputFile, line)) {
 					parseInputLine(i, line);
+					if (i == 1) {
+						startingRegA = regA; 
+					}
 					++i;
 				}
 
@@ -171,14 +177,21 @@ namespace DaySeventeen
 				std::cout << "Executing Assembly:\n";
 
 				size_t s = instructionSet.size();
-				int iter = 0;
-				for (; instructionIndex < s; ++instructionIndex) {
-					++iter;
-					if (iter > kMaxIter) throw std::runtime_error("Inf loop");
-					executeInstruction(instructionSet[instructionIndex]);
+				for (llong_t offset = 0; offset < 100; ++offset) {
+					regA = startingRegA + offset; 
+					instructionIndex = 0; 
+					output.clear(); 
+
+					std::cout << "Testing regA = " << regA << " (Binary: " << std::bitset<64>(regA) << ")\n";
+
+					for (; instructionIndex < s; ++instructionIndex) {
+						executeInstruction(instructionSet[instructionIndex]);
+					}
+
+					std::cout << "Output for regA = " << regA << ": " << output << '\n';
 				}
 
-				std::cout << "Output:\n" << output << '\n';
+				std::cout << "Output: " << output << '\n';
 
 				std::cout << "\nFinished running program";
 			}
@@ -191,7 +204,9 @@ namespace DaySeventeen
 			std::cout << "Register A: " << regA
 				<< ", Register B: " << regB
 				<< ", Register C: " << regC
-				<< ", Output: " << output << '\n';
+				<< ", Output: " << output << '\n'
+				<< "Bits: " << std::bitset<32>(regA) << '\n';
+
 		}
 		void coutCreateInstructionSet()
 		{
