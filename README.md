@@ -1,3 +1,9 @@
+**ARCHIVE**
+
+This project will no longer continue, as its purpose of "getting used to c++" has been achieved. Full completion with my current schedule would likely take several months with limited additional things to teach me from it. 
+
+-----
+
 File organization in Visual Studio happens through filters, which do not translate as folders in github.
 
 Completions visible at https://briekgoethalsdev.be/#/adv-of-code/24
